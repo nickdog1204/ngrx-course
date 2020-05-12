@@ -1,0 +1,10 @@
+doctype html
+mat-card.login-page
+  mat-card-title Login
+  mat-card-content
+    form.login-form([formGroup]='form')
+      mat-form-field
+        input(matInput, type='email', placeholder='Email', formControlName='email')
+      mat-form-field
+        input(matInput, type='password', placeholder='Password', formControlName='password')
+      button(mat-raised-button, color='primary', (click)='login()', [disabled]='!form.valid') Login
