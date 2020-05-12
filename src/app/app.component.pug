@@ -1,0 +1,20 @@
+doctype html
+mat-sidenav-container(fullscreen)
+  mat-sidenav(#start)
+    mat-nav-list((click)='start.close()')
+      a(mat-list-item, routerLink='/courses')
+        mat-icon library_books
+        span Courses
+      a(mat-list-item, routerLink='/login')
+        mat-icon account_circle
+        span Login
+      a(mat-list-item, (click)='logout()')
+        mat-icon exit_to_app
+        span Logout
+  mat-toolbar(color='primary')
+    button.menu-button(mat-icon-button, (click)="start.open('mouse')")
+      mat-icon menu
+  .spinner-container(*ngIf='loading')
+    mat-spinner
+  router-outlet
+
