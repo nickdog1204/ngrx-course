@@ -24,6 +24,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    const userProfileStrFromLocalStorage = localStorage.getItem('user')
+    if (userProfileStrFromLocalStorage) {
+      const user = JSON.parse(userProfileStrFromLocalStorage)
+      this.store.dispatch(AuthActionCreators.createLogInPageUserLoginAction({user}))
+    }
+
     this.router.events.subscribe(event => {
       switch (true) {
         case event instanceof NavigationStart: {
