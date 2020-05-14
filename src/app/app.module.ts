@@ -14,26 +14,29 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthModule} from './auth/auth.module';
 import {StoreModule} from '@ngrx/store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+// import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
-import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
+// import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 
-import {EffectsModule} from '@ngrx/effects';
-import {EntityDataModule} from '@ngrx/data';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// import {EffectsModule} from '@ngrx/effects';
+// import {EntityDataModule} from '@ngrx/data';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {reducers, metaReducers} from './reducers';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {AuthGuard} from "./auth/auth.guard";
 
 
 const routes: Routes = [
   {
     path: 'courses',
-    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule)
+    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
     redirectTo: '/'
   }
 ];
-
 
 
 @NgModule({
@@ -51,7 +54,9 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatListModule,
     MatToolbarModule,
-    AuthModule.forRoot()
+    AuthModule.forRoot(),
+    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   bootstrap: [AppComponent]
 })

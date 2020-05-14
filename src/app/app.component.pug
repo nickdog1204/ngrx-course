@@ -5,10 +5,10 @@ mat-sidenav-container(fullscreen)
       a(mat-list-item, routerLink='/courses')
         mat-icon library_books
         span Courses
-      a(mat-list-item, routerLink='/login')
+      a(mat-list-item, routerLink='/login', *ngIf='isLoggedOut$ | async')
         mat-icon account_circle
         span Login
-      a(mat-list-item, (click)='logout()')
+      a(mat-list-item, (click)='logout()', *ngIf='isLoggedIn$ | async')
         mat-icon exit_to_app
         span Logout
   mat-toolbar(color='primary')
