@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {Course} from "../model/course";
+import {ICourse} from "../model/course";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import {EditCourseDialogComponent} from "../edit-course-dialog/edit-course-dialog.component";
 import {defaultDialogConfig} from '../shared/default-dialog-config';
@@ -12,7 +12,7 @@ import {defaultDialogConfig} from '../shared/default-dialog-config';
 export class CoursesCardListComponent implements OnInit {
 
     @Input()
-    courses: Course[];
+    courses: ICourse[];
 
     @Output()
     courseChanged = new EventEmitter();
@@ -25,7 +25,7 @@ export class CoursesCardListComponent implements OnInit {
 
     }
 
-    editCourse(course:Course) {
+    editCourse(course:ICourse) {
 
         const dialogConfig = defaultDialogConfig();
 
@@ -41,7 +41,7 @@ export class CoursesCardListComponent implements OnInit {
 
     }
 
-  onDeleteCourse(course:Course) {
+  onDeleteCourse(course:ICourse) {
 
 
   }

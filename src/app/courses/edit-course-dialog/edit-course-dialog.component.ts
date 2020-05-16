@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Course} from '../model/course';
+import {ICourse} from '../model/course';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {CoursesHttpService} from '../services/courses-http.service';
@@ -16,7 +16,7 @@ export class EditCourseDialogComponent {
 
   dialogTitle: string;
 
-  course: Course;
+  course: ICourse;
 
   mode: 'create' | 'update';
 
@@ -58,7 +58,7 @@ export class EditCourseDialogComponent {
 
   onSave() {
 
-    const course: Course = {
+    const course: ICourse = {
       ...this.course,
       ...this.form.value
     };
