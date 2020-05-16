@@ -19,6 +19,18 @@ export class CoursesEffects {
       )
   )
 
+  saveCourse$ = createEffect(
+    () => this.actions$
+      .pipe(
+        ofType(CourseActionCreators.editCourseDialog_courseUpdated),
+        concatMap(action => this.coursesHttpService.saveCourse(
+          action.update.id,
+          action.update.changes
+        ))
+      ),
+    {dispatch: false}
+  )
+
 
   constructor(
     private actions$: Actions,

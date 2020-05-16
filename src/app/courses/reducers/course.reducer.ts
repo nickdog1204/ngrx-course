@@ -28,7 +28,10 @@ export const courseListReducer = createReducer(
     (state, action) => adapter.addMany(action.courseList, {
       ...state,
       isCourseListLoaded: true
-    }))
+    })),
+  on(CourseActionCreators.editCourseDialog_courseUpdated, (state, action) =>
+    adapter.updateOne(action.update, state)
+  )
 )
 
 // export const {

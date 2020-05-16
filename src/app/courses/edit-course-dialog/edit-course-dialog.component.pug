@@ -1,0 +1,33 @@
+doctype html
+h2(mat-dialog-title) {{dialogTitle}}
+mat-dialog-content
+  ng-container(*ngIf='form')
+    .spinner-container(*ngIf='loading$ | async')
+      mat-spinner
+    ng-container([formGroup]='form')
+      mat-form-field
+        input(matInput, placeholder='Course Description', formControlName='description')
+      ng-container(*ngIf="mode == 'create'")
+        mat-form-field
+          input(matInput, placeholder='Course Url', formControlName='url')
+        mat-form-field
+          input(matInput, placeholder='Course Icon Url', formControlName='iconUrl')
+      mat-form-field
+        mat-select(placeholder='Select category', formControlName='category')
+          mat-option(value='BEGINNER')
+            | Beginner
+          mat-option(value='INTERMEDIATE')
+            | Intermediate
+          mat-option(value='ADVANCED')
+            | Advanced
+      mat-slide-toggle(formControlName='promo') Promotion On
+      mat-form-field
+        textarea(matInput, placeholder='Description', formControlName='longDescription')
+mat-dialog-actions
+  button(mat-raised-button, (click)='onClose()')
+    | Close
+  button(mat-raised-button, color='primary', [disabled]='!form?.valid || (this.loading$ | async)', (click)='onSave()')
+    | Save
+
+
+
