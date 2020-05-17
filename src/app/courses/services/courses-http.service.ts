@@ -3,9 +3,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Course} from "../model/course";
+import {ICourse} from "../model/course";
 import {map} from "rxjs/operators";
-import {Lesson} from "../model/lesson";
+import {ILesson} from "../model/lesson";
 
 
 @Injectable()
@@ -15,22 +15,22 @@ export class CoursesHttpService {
 
     }
 
-    findAllCourses(): Observable<Course[]> {
+    findAllCourses(): Observable<ICourse[]> {
         return this.http.get('/api/courses')
             .pipe(
                 map(res => res['payload'])
             );
     }
 
-    findCourseByUrl(courseUrl: string): Observable<Course> {
-      return this.http.get<Course>(`/api/courses/${courseUrl}`);
+    findCourseByUrl(courseUrl: string): Observable<ICourse> {
+      return this.http.get<ICourse>(`/api/courses/${courseUrl}`);
     }
 
     findLessons(
         courseId:number,
-        pageNumber = 0, pageSize = 3):  Observable<Lesson[]> {
+        pageNumber = 0, pageSize = 3):  Observable<ILesson[]> {
 
-        return this.http.get<Lesson[]>('/api/lessons', {
+        return this.http.get<ILesson[]>('/api/lessons', {
             params: new HttpParams()
                 .set('courseId', courseId.toString())
                 .set('sortOrder', 'asc')
@@ -40,7 +40,7 @@ export class CoursesHttpService {
     }
 
 
-    saveCourse(courseId: number | string, changes: Partial<Course>) {
+    saveCourse(courseId: number | string, changes: Partial<ICourse>) {
         return this.http.put('/api/course/' + courseId, changes);
     }
 

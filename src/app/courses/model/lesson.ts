@@ -1,6 +1,6 @@
 
 
-export interface Lesson {
+export interface ILesson {
     id: number;
     description: string;
     duration: string;
@@ -9,7 +9,7 @@ export interface Lesson {
 }
 
 
-export function compareLessons(l1:Lesson, l2: Lesson) {
+export function compareLessons(l1:ILesson, l2: ILesson) {
 
   const compareCourses = l1.courseId - l2.courseId;
 

@@ -1,0 +1,20 @@
+doctype html
+.course(*ngIf='(course$ | async) as course')
+  h2 {{course?.description}}
+  img.course-thumbnail.mat-elevation-z8([src]='course?.iconUrl')
+  .spinner-container(*ngIf='(loading$ | async )')
+    mat-spinner
+  mat-table.lessons-table.mat-elevation-z8([dataSource]='lessons$ | async')
+    ng-container(matColumnDef='seqNo')
+      mat-header-cell(*matHeaderCellDef) #
+      mat-cell(*matCellDef='let lesson') {{lesson.seqNo}}
+    ng-container(matColumnDef='description')
+      mat-header-cell(*matHeaderCellDef) Description
+      mat-cell.description-cell(*matCellDef='let lesson') {{lesson.description}}
+    ng-container(matColumnDef='duration')
+      mat-header-cell(*matHeaderCellDef) Duration
+      mat-cell.duration-cell(*matCellDef='let lesson') {{lesson.duration}}
+
+    mat-header-row(*matHeaderRowDef='displayedColumns')
+    mat-row(*matRowDef='let row; columns: displayedColumns')
+  button.bottom-toolbar(mat-raised-button, color='accent', (click)='loadLessonsPage(course)') Load More

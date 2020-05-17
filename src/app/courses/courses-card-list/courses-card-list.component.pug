@@ -1,0 +1,15 @@
+doctype html
+mat-card.course-card.mat-elevation-z10(*ngFor='let course of courses')
+  mat-card-header
+    mat-card-title {{course.description}}
+  img(mat-card-image, [src]='course.iconUrl')
+  mat-card-content
+    p {{course.longDescription}}
+  mat-card-actions.course-actions
+    button(mat-raised-button, color='primary', [routerLink]="['/courses', course.url]")
+      | VIEW
+    button(mat-mini-fab, color='accent')
+      mat-icon.add-course-btn((click)='editCourse(course)') edit
+    button(mat-mini-fab, color='warn')
+      mat-icon.add-course-btn((click)='onDeleteCourse(course)') delete
+
