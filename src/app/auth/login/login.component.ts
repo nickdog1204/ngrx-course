@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(val.email, val.password)
       .pipe(
         tap(user => {
-          console.log(user)
+          // console.log(user)
 
           this.store.dispatch(AuthActionCreators.createLogInPageUserLoginAction({user}))
           // this.store.dispatch<LogInPageUserLoginAction>(LogInPageUserLoginAction.create(user))
